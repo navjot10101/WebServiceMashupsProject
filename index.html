@@ -1,0 +1,62 @@
+Google Maps Mashup Starter Code:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#map {
+			height: 100%;
+		}
+		/* Optional: Makes the sample page fill the window. */
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	var map;
+	var aboutme = [
+		{"surrey":"city","coords":[49.189060,-122.847233]},
+		{"mexico":"state","coords":[23.229043,-101.793823]},
+        {"city":"Toronto","coords":[43.619301, -79.362488]},
+        {"province":"British Columbia","coords":[56.408583, -123.640137]},
+        {"city":"New York","coords":[40.696388, -74.017639]},
+        {"city":"kangas","coords":[39.042920, -94.608765]}
+		];
+
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: new google.maps.LatLng(44, -110),
+			mapTypeId: 'terrain'
+		});
+
+		mashParks(aboutme);
+	}
+
+	function mashParks(results) {
+	for (var i = 0; i < results.length; i++) {
+		var coords = results[i].coords;
+		var latLng = new google.maps.LatLng(coords[0], coords[1]);
+		var marker = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			label:results[i].park
+			});
+		}
+	}
+
+
+
+</script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTM5RKrtCLpZAj5HU3K3cTvFNB240NsBg&callback=initMap">
+</script>
+</body>
+</html>
